@@ -1,5 +1,6 @@
 import { Component, OnChanges, OnInit, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { Book } from '../book.interface';
+import { BookDataService } from '../book-data.service';
 
 @Component({
   selector: 'book-list',
@@ -13,22 +14,11 @@ export class BookListComponent implements OnInit, OnChanges {
 
   breite = 50;
 
-  books: Book[] = [
-    {
-      title: 'Angular 16',
-      isbn: '123456',
-      price: 9.99,
-      coverUrl: "https://m.media-amazon.com/images/I/71rUdxFkaCL._AC_UY218_.jpg",
-      rating: 4.5
-    },
-    {
-      title: 'Angular 17 is great',
-      isbn: '123457',
-      price: 17.99,
-      coverUrl: "https://m.media-amazon.com/images/I/51zVmluMLCL._AC_UY218_.jpg",
-      rating: 4.7
-      }
-  ];
+  books: Book[] = [];
+
+  constructor(private bookDataService: BookDataService) {
+    
+  }
 
   toggleCover() {
     this.coverIsVisible = !this.coverIsVisible;
@@ -38,7 +28,11 @@ export class BookListComponent implements OnInit, OnChanges {
     console.log('ngOnChanges', changes);
   }
 
-  ngOnInit(): void {  
+  ngOnInit(): void { 
+    // this.books = this.bookDataService.getBooks(); 
+
+    this.bookDataService.getBooks().subscribe(
+          books => this.books = books);
   }
   upRating($event: string) {
     console.log('upRating', $event);
@@ -48,5 +42,10 @@ export class BookListComponent implements OnInit, OnChanges {
       book.rating = Math.min(5, parseFloat((book.rating + 0.1).toFixed(2)));
     }
   }
+
+  deleteBook(isbn: string) {
+    this.bookDataService.deleteBook(isbn).subscribe((data) => {alert('Book deleted')});
+  }
     
+
 }

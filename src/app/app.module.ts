@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { CalculatorComponent } from './shared/calculator/calculator.component';
 import { BookFilterPipe } from './books/book-filter.pipe';
 import { RatingComponent } from './shared/rating/rating.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { RatingComponent } from './shared/rating/rating.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

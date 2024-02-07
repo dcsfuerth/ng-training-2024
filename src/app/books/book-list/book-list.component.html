@@ -1,4 +1,4 @@
-<!-- {{books | json}} -->
+{{books | json}}
 
 Filtern nach:
 <input type="text" [(ngModel)]="filterValue" />
@@ -19,6 +19,7 @@ Filtern nach:
     <td>Preis</td>
     <td>Cover</td>
     <td>Rating</td>
+    <td>aktion</td>
   </tr>
   @for (book of (books | bookFilter: filterValue); track book.isbn) {
   <tr>
@@ -41,6 +42,8 @@ Filtern nach:
         (notifyUp)="upRating($event)"
       ></rating>
     </td>
+    <td>
+      <button (click)="deleteBook(book.isbn)">Löschen</button>
   </tr>
   }
 </table>
