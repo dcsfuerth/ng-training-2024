@@ -9,6 +9,8 @@ import { CalculatorComponent } from './shared/calculator/calculator.component';
 import { BookFilterPipe } from './books/book-filter.pipe';
 import { RatingComponent } from './shared/rating/rating.component';
 import { HttpClientModule } from '@angular/common/http';
+import { BookDetailComponent } from './books/book-detail/book-detail.component';
+import { WelcomeComponent } from './books/welcome/welcome.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { HttpClientModule } from '@angular/common/http';
     BookListComponent,
     CalculatorComponent,
     BookFilterPipe,
-    RatingComponent
+    RatingComponent,
+    BookDetailComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,

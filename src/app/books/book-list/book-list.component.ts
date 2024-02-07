@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { Book } from '../book.interface';
 import { BookDataService } from '../book-data.service';
 
@@ -6,7 +6,7 @@ import { BookDataService } from '../book-data.service';
   selector: 'book-list',
   templateUrl: './book-list.component.html',
   styleUrl: './book-list.component.css'})
-export class BookListComponent implements OnInit, OnChanges {
+export class BookListComponent implements OnInit, OnChanges, OnDestroy {
 
   filterValue: string = '';
 
@@ -19,6 +19,9 @@ export class BookListComponent implements OnInit, OnChanges {
   constructor(private bookDataService: BookDataService) {
     
   }
+  ngOnDestroy(): void {
+    console.log('ngOnDestroy');  
+  }
 
   toggleCover() {
     this.coverIsVisible = !this.coverIsVisible;
@@ -29,8 +32,7 @@ export class BookListComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void { 
-    // this.books = this.bookDataService.getBooks(); 
-
+    console.log('ngOnInit');
     this.bookDataService.getBooks().subscribe(
           books => this.books = books);
   }
@@ -44,8 +46,16 @@ export class BookListComponent implements OnInit, OnChanges {
   }
 
   deleteBook(isbn: string) {
-    this.bookDataService.deleteBook(isbn).subscribe((data) => {alert('Book deleted')});
+    this.bookDataService.deleteBook(isbn).subscribe((data) => {
+      this.ngOnInit();
+      alert('Book deleted')});
+
+    alert('');
+      
+      
+      
   }
+  
     
 
 }
