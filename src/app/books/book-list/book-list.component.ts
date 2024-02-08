@@ -31,10 +31,24 @@ export class BookListComponent implements OnInit, OnChanges, OnDestroy {
     console.log('ngOnChanges', changes);
   }
 
-  ngOnInit(): void { 
+  async ngOnInit(): Promise<void> { 
     console.log('ngOnInit');
-    this.bookDataService.getBooks().subscribe(
-          books => this.books = books);
+
+    // const promise1 = this.bookDataService.getBooks();
+    // const promise2 = this.bookDataService.getBooks();
+    // const promise3 = this.bookDataService.getBooks();
+    // const promise4 = this.bookDataService.getBooks();
+    // const data = await Promise.all([promise1, promise2, promise3, promise4]);
+    
+
+    // this.bookDataService.getBooks().then((data) => console.log('books', data));
+
+    this.books = await this.bookDataService.getBooks();
+    console.log('books', this.books);
+
+
+
+
   }
   upRating($event: string) {
     console.log('upRating', $event);
