@@ -17,7 +17,6 @@ export class RatingComponent implements OnChanges  {
   notifyUp: EventEmitter<string> = new EventEmitter<string>();
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log({changes});
   }
   rateUp() {
     this.notifyUp.emit(this.id);
