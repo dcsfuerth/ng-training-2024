@@ -1,0 +1,9 @@
+Alles zum Buch mit der ISBN {{isbn}}<br>
+
+@if (book) {
+    {{book | json}}
+}
+@else {
+    <p>Kein Buch gefunden!!!</p>
+}
+

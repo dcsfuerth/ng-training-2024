@@ -1,0 +1,8 @@
+{{count$ | async}}
+{{store | async | json}}
+
+<button (click)="doIncrement()">[+]</button>
+<button (click)="doDecrement()">[-]</button>
+<button (click)="doReset()">[c]</button>
+
+<router-outlet />
