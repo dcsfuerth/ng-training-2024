@@ -19,8 +19,10 @@ describe('BookDataService', () => {
 
   it('should load an existing book using the correct URL', () => {
     const book = { isbn: '42', name: 'Peters Angular-Kurs' };
-    mockHttp.get.and.returnValue(of(book));
+    mockHttp.get.and.returnValue(of(book));    
+
     bookDataService.getBook('42');
+
     expect(mockHttp.get).toHaveBeenCalledWith('http://localhost:3000/books/42');
   })
 });
