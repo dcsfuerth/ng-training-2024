@@ -1,6 +1,7 @@
 import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { Book } from '../book.interface';
 import { BookDataService } from '../book-data.service';
+import { WarenkorbService } from '../warenkorb.service';
 
 @Component({
   selector: 'book-list',
@@ -16,9 +17,15 @@ export class BookListComponent implements OnInit, OnChanges, OnDestroy {
 
   books: Book[] = [];
 
-  constructor(private bookDataService: BookDataService) {
-    
+  constructor(
+    private bookDataService: BookDataService, 
+    private warenkorbService: WarenkorbService) {
   }
+
+  getWarenkorb() {
+    return this.warenkorbService.warenkorb;
+  }
+
   ngOnDestroy(): void {
     console.log('ngOnDestroy');  
   }
@@ -63,13 +70,18 @@ export class BookListComponent implements OnInit, OnChanges, OnDestroy {
     this.bookDataService.deleteBook(isbn).subscribe((data) => {
       this.ngOnInit();
       alert('Book deleted')});
-
-    alert('');
-      
-      
-      
   }
   
+  buyBook(book: Book) {
+    const warenkorbItem = {
+      isbn: book.isbn,
+      name: book.title,
+      preis: book.price,
+      menge: 1
+    };  
+    this.warenkorbService.addToWarenkorb(warenkorbItem);
+  }
+    
     
 
 }

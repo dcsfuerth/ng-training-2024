@@ -1,9 +1,11 @@
-{{books | json}}
-
+Warenkorb:
+{{getWarenkorb() | async | json}}
+<br />
+<br />
+<br />
 Filtern nach:
 <input type="text" [(ngModel)]="filterValue" />
 <br />
-<!-- {{filterValue}} -->
 <br />
 <br />
 <button (click)="toggleCover()">Cover {{coverIsVisible ? "aus" : "ein"}}blenden</button>
@@ -42,6 +44,7 @@ Filtern nach:
     </td>
     <td>
       <button (click)="deleteBook(book.isbn)">Löschen</button>
+      <button (click)="buyBook(book)">Kaufen</button>
     </td>
   </tr>
   }
